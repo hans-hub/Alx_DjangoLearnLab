@@ -1,0 +1,38 @@
+# Virtual environment folders
+venv/
+env/
+ENV/
+.venv/
+.VENV/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django-specific files
+*.log
+*.pot
+*.pyc
+db.sqlite3
+*.sqlite3
+
+# VSCode and other editor-specific files
+.vscode/
+.idea/
+*.swp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment and config
+.env
+*.env
+
+# Static and media folders (optional, if generated at runtime)
+staticfiles/
+media/
+
+# Requirements (only if you're not tracking lock files)
+pip-wheel-metadata/
