@@ -1,2 +1,3 @@
-retrieved_book.title = "The Pragmatic Programmer: 20th Anniversary Edition"
-retrieved_book.save()
+book = Book.objects.get(title="1984")
+book.title = "Nineteen Eighty-Four"
+book.save()
