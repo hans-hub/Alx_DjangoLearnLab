@@ -6,14 +6,10 @@ from .models import Library
 # Create your views here.
 # Function-based view that displays a list of books with their authors
 
-
-def book_list(request):
+def list_books(request):
     books = Book.objects.select_related('author').all()
-    # Prepare simple list of strings
-    context = {
-        'books': [f"{book.title} by {book.author.name}" for book in books]
-    }
-    return render(request, 'relationship_app/book_list.html', context)
+    return render(request, 'relationship_app/list_books.html', {'books': books})
+
 
 
 
