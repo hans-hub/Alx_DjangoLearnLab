@@ -25,10 +25,8 @@ def sample_queries():
     librarian = library.librarian
     print(f"Librarian at {library.name}:", librarian.name)
 
-    4.#Query book by specific author
-    author_name = "J.K. Rowling"
-    books_by_author = Book.objects.filter(author__name=author_name)     
-    print(f"Books by {author_name}:", [b.title for b in books_by_author])   
+    
+
 
 
 if __name__ == "__main__":
