@@ -8,20 +8,22 @@ django.setup()
 
 from relationship_app.models import Author, Book, Library, Librarian
 
+from relationship_app.models import Author, Book, Library, Librarian
+
 def sample_queries():
-    # 1. Query all books by a specific author
-    author = Author.objects.get(name="J. K. Rowling")
-    books_by_author = author.books.all()
-    print(f"Books by {author.name}: {[book.title for book in books_by_author]}")
+    # Example variable for the library name
+    library_name = "Central Library"
 
-    # 2. List all books in a library
-    library = Library.objects.get(name="Central Library")
-    library_books = library.books.all()
-    print(f"Books in {library.name}: {[book.title for book in library_books]}")
+    # ✅ 1. Retrieve the library
+    library = Library.objects.get(name=library_name)
 
-    # 3. Retrieve the librarian for a library
+    # 2. Query all books in that library
+    books_in_library = library.books.all()
+    print(f"Books in {library.name}:", [b.title for b in books_in_library])
+
+    # 3. Retrieve the librarian associated with that library
     librarian = library.librarian
-    print(f"Librarian at {library.name}: {librarian.name}")
+    print(f"Librarian at {library.name}:", librarian.name)
 
 if __name__ == "__main__":
     sample_queries()
