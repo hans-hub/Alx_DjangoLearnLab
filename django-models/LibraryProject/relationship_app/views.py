@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .models import Book
 from django.views.generic.detail import DetailView
 from .models import Library
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 # Create your views here.
 # Function-based view that displays a list of books with their authors
@@ -22,3 +26,38 @@ class LibraryDetailView(DetailView):
         ctx = super().get_context_data(**kwargs)
         ctx['books'] = self.object.books.select_related('author').all()
         return ctx
+
+
+
+
+# Register View
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration successful.")
+            return redirect('home')  # Replace 'home' with your actual home page route name
+    else:
+        form = UserCreationForm()
+    return render(request, 'relationship_app/register.html', {'form': form})
+
+# Login View
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, "Invalid username or password.")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'relationship_app/login.html', {'form': form})
+
+# Logout View
+def logout_view(request):
+    logout(request)
+    return render(request, 'relationship_app/logout.html')
