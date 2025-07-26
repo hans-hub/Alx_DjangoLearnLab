@@ -7,6 +7,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.shortcuts import render
+from django.contrib.auth.decorators import user_passes_test, login_required
 
 # Create your views here.
 # Function-based view that displays a list of books with their authors
@@ -62,3 +64,25 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return render(request, 'relationship_app/logout.html')
+
+
+
+def role_required(role):
+    def decorator(user):
+        return hasattr(user, 'userprofile') and user.userprofile.role == role
+    return user_passes_test(decorator)
+
+@login_required
+@role_required('Admin')
+def admin_view(request):
+    return render(request, 'relationship_app/admin_view.html')
+
+@login_required
+@role_required('Librarian')
+def librarian_view(request):
+    return render(request, 'relationship_app/librarian_view.html')
+
+@login_required
+@role_required('Member')
+def member_view(request):
+    return render(request, 'relationship_app/member_view.html')
