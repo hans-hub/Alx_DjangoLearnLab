@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
@@ -9,7 +12,8 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
     publication_year = models.IntegerField()
-    
+
+
     def __str__(self):
         return f"{self.title} by {self.author} ({self.publication_year})"
 
@@ -47,9 +51,6 @@ class description(models.Model):
 
 # accounts/models.py
 
-from django.contrib.auth.models import AbstractUser, BaseUserManager
-from django.db import models
-from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username, date_of_birth=None, password=None, **extra_fields):
