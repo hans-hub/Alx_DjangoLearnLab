@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
-from rest_framework import generics,permissions
+from rest_framework import generics,permissions,filters
 from .models import Book
 from .serializers import BookSerializer 
 
@@ -15,7 +16,22 @@ class BookListView(generics.ListAPIView):
     filterset_fields = ['publication_year', 'author']
     ordering_fields = ['title', 'publication_year']
 
+#enabling filtering, searching and ordering
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter
+    ]
 
+#Specidy fields for filtering
+filterset_fields = ['title','author','publication_year']
+
+#Fields for searching(search uses `icontains`)
+search_fields = ['title', 'author']
+
+# Fields allowed for ordering
+ordering_fields = ['title', 'publication_year']
+ordering = ['title']  # Default ordering
 
 # Retrieve a specific book by ID (public access)
 class BookDetailView(generics.RetrieveAPIView):
