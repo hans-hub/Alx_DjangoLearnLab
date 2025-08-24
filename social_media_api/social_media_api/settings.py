@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'post',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -45,10 +46,16 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'accounts.User'  # custom user model
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 5,  # 5 posts/comments per page
+    "DEFAULT_FILTER_BACKENDS": [
+        "rest_framework.filters.SearchFilter"
     ]
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
