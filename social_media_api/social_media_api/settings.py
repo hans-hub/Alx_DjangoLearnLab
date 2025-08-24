@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d*pl8j41nn1a^&0v9wr%kjtmc6cegy7x0^v0tu6=-egh2du0=a'
+SECRET_KEY = 'django-insecure-u=3ewt0p%murcep8%yz&s0939qvt0$23o)guk5yfzy$*=og$y!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,24 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'post',
-    'rest_framework',
+    'rest_framework',  
     'rest_framework.authtoken',
+    
 ]
 
 AUTH_USER_MODEL = 'accounts.User'  # custom user model
-
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
-    ],
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 5,  # 5 posts/comments per page
-    "DEFAULT_FILTER_BACKENDS": [
-        "rest_framework.filters.SearchFilter"
-    ]
-}
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
